@@ -15,44 +15,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Create a user
-router.post("/", async (req, res) => {
-  const { name, email, password } = req.body;
-  try {
-    const user = new User({ name, email, password });
-    await user.save();
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-// Update a user
-router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { name, email, password } = req.body;
-  try {
-    const user = await User.findByIdAndUpdate(
-      id,
-      { name, email, password },
-      { new: true }
-    );
-    res.json(user);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-// Delete a user
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    await User.findByIdAndDelete(id);
-    res.json({ message: "User deleted" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
 
 //registration
 
